@@ -48,4 +48,4 @@
     (create-new-pane my-panel)
     (update-drawing my-panel (fn [g]
                                (draw-lines g (polygonalize-points points))
-                               (draw-points g (points))))))
+                               (draw-points g points)))))
