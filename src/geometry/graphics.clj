@@ -19,12 +19,12 @@
 (defn point [x y]
   (offset-circle x y 4))
 
-(defn draw-point [g x y]
+(defn draw-point [g {x :x y :y}]
   (apply (memfn drawOval x y w h) g (point x y)))
 
 (defn draw-points [g points]
   (doseq [point points] (apply draw-point g point)))
 
 (defn draw-lines [g coord-pairs]
-  (doseq [[x1 y1 x2 y2] coord-pairs]
+  (doseq [[{x1 :x y1 :y} {x2 :x y2 :y}] coord-pairs]
     (.drawLine g x1 y1 x2 y2)))

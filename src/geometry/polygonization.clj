@@ -18,7 +18,7 @@
 
 (defn -main []
   (let [my-panel (graph/panel)
-        points [[10 10] [30 20] [100 120] [90 60] [95 19 ] [90 90] [25 195] [144 144]]]
+        points [{:x 10 :y 10} {:x 30 :y 20} {:x 100 :y 120} {:x 90 :y 60} {:x 95 :y 19 } {:x 90 :y 90} {:x 25 :y 195} {:x 144 :y 144}]]
     (graph/create-new-pane my-panel)
     (graph/update-drawing my-panel (fn [g]
                                (graph/draw-lines g (polygonalize-points points))
