@@ -3,8 +3,8 @@
 (defn panel []
      (proxy [JPanel] [] (paintComponent [g] (proxy-super paintComponent g))))
 
-(defn create-new-pane [content-panel]
-  (doto (JFrame.) (.setContentPane content-panel) (.setSize 200 200) (.show)))
+(defn create-new-pane [content-panel x y]
+  (doto (JFrame.) (.setContentPane content-panel) (.setSize x y) (.show)))
 
 (defn update-drawing [content-panel draw-fn]
   (update-proxy content-panel {"paintComponent" (fn [t g] (.clearRect g 0 0 (.getWidth content-panel) (.getHeight content-panel)) (draw-fn g))})
@@ -16,6 +16,9 @@
         adjust-y (- y offset)]
     [adjust-x adjust-y r r]))
 
+(defn random-points [x y]
+  (repeatedly #(identity {:x (rand-int x) :y (rand-int y)})))
+
 (defn point [x y]
   (offset-circle x y 4))
 
@@ -23,7 +26,7 @@
   (apply (memfn drawOval x y w h) g (point x y)))
 
 (defn draw-points [g points]
-  (doseq [point points] (apply draw-point g point)))
+  (doseq [point points] (draw-point g point)))
 
 (defn draw-lines [g coord-pairs]
   (doseq [[{x1 :x y1 :y} {x2 :x y2 :y}] coord-pairs]
